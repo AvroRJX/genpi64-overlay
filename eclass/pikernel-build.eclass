@@ -21,15 +21,15 @@
 
 inherit kernel-build
 
-IUSE="bcmrpi bcm2709 bcmrpi3 +bcm2711 -initramfs"
-REQUIRED_USE="|| ( bcmrpi bcm2709 bcmrpi3 bcm2711 )"
+IUSE="bcmrpi bcm2709 bcmrpi3 +bcm2711 +bcm2712 -initramfs"
+REQUIRED_USE="|| ( bcmrpi bcm2709 bcmrpi3 bcm2711 bcm2712 )"
 
 SLOT="0"
 
 pikernel-build_get_targets() {
 	targets=()
 	configs=()
-	for n in bcmrpi bcm2709 bcmrpi3 bcm2711
+	for n in bcmrpi bcm2709 bcmrpi3 bcm2711 bcm2712
 	do
 	if use ${n}; then
 		ebegin "using $n"
@@ -158,9 +158,12 @@ pikernel-build_src_install() {
 		if [ "${n}" == "bcmrpi3" ]; then
 			KERNEL=kernel8
 			export KERNEL_SUFFIX=-v8
-		else
+		elif [ "${n}" == "bcm2711" ]; then
 			KERNEL=kernel8-p4
 			export KERNEL_SUFFIX=-v8-p4
+		else
+                       KERNEL=kernel8_2712
+                       export KERNEL_SUFFIX=_2712 
 		fi
 		insinto "/boot/"
 		doins "${n}"/arch/arm64/boot/dts/broadcom/*.dtb
@@ -206,9 +209,12 @@ pikernel-build_merge_configs() {
 		if [ "${f}" == "bcmrpi3" ]; then
 			KERNEL=kernel8
 			export KERNEL_SUFFIX=-v8
-		else
+		elif [ "${f}" == "bcm2711" ]; then
 			KERNEL=kernel8-p4
 			export KERNEL_SUFFIX=-v8-p4
+                else
+                        KERNEL=kernel_2712
+                        export KERNEL_SUFFIX=_2712
 		fi
 
 		[[ -f "${WORKDIR}/${f}/.config" ]] || die "${FUNCNAME}: {$f}/.config does not exist"
