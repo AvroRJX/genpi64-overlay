@@ -160,7 +160,7 @@ pikernel-build_src_install() {
 			KERNEL=kernel8-p4
 			export KERNEL_SUFFIX=-v8-p4
 		elif [ "${n}" == "bcm2712" ]; then
-			KERNEL=kernel8_2712
+			KERNEL=kernel_2712
 			export KERNEL_SUFFIX=-2712
 		else
 			die "Unkown target ${f}"
@@ -210,7 +210,7 @@ pikernel-build_merge_configs() {
 			KERNEL=kernel8-p4
 			export KERNEL_SUFFIX=-v8-p4
 		elif [ "${f}" == "bcm2712" ]; then
-			KERNEL=kernel8_2712
+			KERNEL=kernel_2712
 			export KERNEL_SUFFIX=-2712
 		else
 			die "Unkown target ${f}"
