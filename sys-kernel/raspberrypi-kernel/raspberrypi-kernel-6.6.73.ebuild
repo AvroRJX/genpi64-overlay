@@ -1,18 +1,18 @@
-# Copyright 2020-2024 Gentoo Authors
+# Copyright 2020-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# Largely derived from gentoo-kernel-6.6.31.ebuild
+# Largely derived from gentoo-kernel-6.6.73.ebuild
 
 EAPI=8
 
 inherit pikernel-build
 
-COMMIT=789af262fb268b2006099a096faf4a383592ce1b
-MY_P=${COMMIT}
-GENPATCHES_P=genpatches-6.6-35
+COMMIT=81d11968e656eea78f44f5fe02a8e7eec7677063
+MY_P=linux-${PV}
+GENPATCHES_P=genpatches-${PV%.*}-$(( ${PV##*.} + 9 ))
 # https://koji.fedoraproject.org/koji/packageinfo?packageID=8
 # forked to https://github.com/projg2/fedora-kernel-config-for-gentoo
 CONFIG_VER=6.6.12-gentoo
-GENTOO_CONFIG_VER=g13
+GENTOO_CONFIG_VER=g15
 
 DESCRIPTION="Raspberry Pi Foundation Linux kernel built with Gentoo patches"
 HOMEPAGE="
@@ -21,7 +21,7 @@ HOMEPAGE="
 	https://github.com/raspberrypi/linux
 "
 SRC_URI+="
-	https://github.com/raspberrypi/linux/archive/${MY_P}.tar.gz -> linux-${KV_FULL}.tar.gz
+	https://github.com/raspberrypi/linux/archive/${COMMIT}.tar.gz -> ${MY_P}.tar.gz
 	https://dev.gentoo.org/~alicef/dist/genpatches/${GENPATCHES_P}.base.tar.xz
 	https://dev.gentoo.org/~alicef/dist/genpatches/${GENPATCHES_P}.extras.tar.xz
 	https://github.com/projg2/gentoo-kernel-config/archive/${GENTOO_CONFIG_VER}.tar.gz
@@ -43,7 +43,7 @@ SRC_URI+="
 			-> kernel-i686-fedora.config.${CONFIG_VER}
 	)
 "
-S=${WORKDIR}/linux-${MY_P}
+S=${WORKDIR}/linux-${COMMIT}
 
 LICENSE="GPL-2"
 KEYWORDS="~arm arm64"
