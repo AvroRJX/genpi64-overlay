@@ -157,7 +157,7 @@ pikernel-build_src_install() {
 	do
 		ebegin "Installing ${n}"
 		if [ "${n}" == "bcm2711" ]; then
-			KERNEL=kernel8-p4
+			KERNEL=kernel8
 			export KERNEL_SUFFIX=-v8-p4
 		elif [ "${n}" == "bcm2712" ]; then
 			KERNEL=kernel_2712
@@ -207,7 +207,7 @@ pikernel-build_merge_configs() {
 	for f in "${targets[@]}"
 	do
 		if [ "${f}" == "bcm2711" ]; then
-			KERNEL=kernel8-p4
+			KERNEL=kernel8
 			export KERNEL_SUFFIX=-v8-p4
 		elif [ "${f}" == "bcm2712" ]; then
 			KERNEL=kernel_2712
