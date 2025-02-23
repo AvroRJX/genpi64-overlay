@@ -3,4 +3,4 @@
 # technically it's possible that upstream gentoo will define their own copies
 # of these, but these specific versions are already older than what's in gentoo's
 # repo, so the likelyhood is pretty low. If it does happen, we can re-assess.
-=virtual/dist-kernel-6.6.73
+=virtual/dist-kernel-6.12.15
